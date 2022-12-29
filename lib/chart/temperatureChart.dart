@@ -5,7 +5,7 @@ import 'package:line_chart/model/line-chart.model.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
-import '../views/PlatFormInfo_view.dart';
+import '../views/CurrentView/PlatFormInfo_view.dart';
 
   // class ChartData {
   //       ChartData(this.x, this.y);
@@ -23,6 +23,7 @@ class temperatureChart extends StatelessWidget{
       LineChartModel(amount: 800, date: DateTime(2020, 1, 5)),
       LineChartModel(amount: 200, date: DateTime(2020, 1, 6)),
       LineChartModel(amount: 120, date: DateTime(2020, 1, 7)),
+      LineChartModel(amount: 120, date: DateTime(2020, 1, 7)),
       LineChartModel(amount: 140, date: DateTime(2020, 1, 8)),
       LineChartModel(amount: 110, date: DateTime(2020, 1, 9)),
       LineChartModel(amount: 250, date: DateTime(2020, 1, 10)),
@@ -34,6 +35,9 @@ class temperatureChart extends StatelessWidget{
       LineChartModel(amount: 500, date: DateTime(2020, 1, 4)),
       LineChartModel(amount: 800, date: DateTime(2020, 1, 5)),
       LineChartModel(amount: 200, date: DateTime(2020, 1, 6)),
+      LineChartModel(amount: 120, date: DateTime(2020, 1, 7)),
+      LineChartModel(amount: 120, date: DateTime(2020, 1, 7)),
+      LineChartModel(amount: 120, date: DateTime(2020, 1, 7)),
       LineChartModel(amount: 120, date: DateTime(2020, 1, 7)),
       LineChartModel(amount: 140, date: DateTime(2020, 1, 8)),
     ];
@@ -103,21 +107,25 @@ class temperatureChart extends StatelessWidget{
                           timeIcon(),
                           timeIcon(),
                           timeIcon(),
+                          timeIcon(),
+                          timeIcon(),
+                          timeIcon(),
+                          timeIcon(),
+
                         ],
                       ),
 
                       Container(
                         // color: Colors.amber,
                         height: 50,
-                        width: 350,
+                        width: 450,
+                        // color: Colors.amber,
                         child: SfSparkLineChart(
                           axisLineWidth: 0,
-                        // trackball: SparkChartTrackball(
-                        //   activationMode: SparkChartActivationMode.tap
-                        // ),
-                        // width: 500,
+                          
                           marker: SparkChartMarker(
-                            
+                            borderWidth: 1,
+                            borderColor: Colors.white,
                             displayMode: SparkChartMarkerDisplayMode.all
                           ),
                           labelDisplayMode: SparkChartLabelDisplayMode.all,
@@ -131,6 +139,10 @@ class temperatureChart extends StatelessWidget{
 
 
 
+
+
+
+
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -139,7 +151,7 @@ class temperatureChart extends StatelessWidget{
                           //   style: Theme.of(context).textTheme.headline5,
                           // ),
                           LineChart(
-                            width: 500,
+                            width: 840,
                             height: 50,
                             data: data,
                             linePaint: linePaint,
@@ -154,6 +166,7 @@ class temperatureChart extends StatelessWidget{
                               shape: BoxShape.circle,
                               color: Color.fromARGB(255, 56, 27, 27),
                             ),
+                            
                             insideCirclePaint: insideCirclePaint,
                             onValuePointer: (LineChartModelCallback value) {
                               print('${value.chart} ${value.percentage}');
@@ -165,6 +178,9 @@ class temperatureChart extends StatelessWidget{
                           ),
                         ],
                       ),
+
+
+                      
 
 
                     ],
@@ -180,7 +196,7 @@ class temperatureChart extends StatelessWidget{
 
 Widget timeIcon(){
  return Container(
-  width: 25,
+  width: 35,
   child: Row(
     children: [
       Text('20', style: appStyleText.textStyle14,)

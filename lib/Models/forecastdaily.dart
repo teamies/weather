@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'day_model.dart';
-import 'temp_model.dart';
+import 'current_model.dart';
 
 class Forecast {
   final DateTime lastUpdated;

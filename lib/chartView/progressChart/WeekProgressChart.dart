@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import '../../controller/day_controller.dart';
 import 'ChartPaint.dart';
 
 
@@ -22,6 +23,8 @@ class WeekProgressChart extends StatefulWidget {
 
 const WeekDays = ["","Th 2","Th 3","Th 4","Th 5","Th 6","Th 7","CN"];
 class _WeekProgressChartState extends State<WeekProgressChart> {
+  late DailyController _daily;
+
   late double _min, _max;
   late List<double> _Y;
   late List<String> _X;
@@ -29,6 +32,7 @@ class _WeekProgressChartState extends State<WeekProgressChart> {
   @override
   void initState() {
     super.initState();
+    _daily = new DailyController();
     var min = double.maxFinite;
     var max = -double.maxFinite;
     widget.scores.forEach((p) {
@@ -39,6 +43,7 @@ class _WeekProgressChartState extends State<WeekProgressChart> {
      setState(() {
        _min = min;
        _max = max;
+      //  _Y = widget.scores.map((p) =>"${snapshot.data![index].tempDay.toString()}").toList();
        _Y = widget.scores.map((p) => p.value).toList();
        _X = widget.scores
             .map((p) => "${WeekDays[p.time.weekday]}\n${p.time.day}")

@@ -1,5 +1,5 @@
 
-import 'package:flutter_app_weather/Models/temp_model.dart';
+import 'package:flutter_app_weather/Models/current_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';

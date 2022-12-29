@@ -1,6 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
-
 enum WeatherCondition {
   thunderstorm,
   lightrain,
@@ -16,55 +14,30 @@ enum WeatherCondition {
   unknown
 }
 
-
-class Current {
-  late int sunrise;//binh minh
-  late int sunset;//hoang hon
-  late double temp;
-  late var feelslike;// cam giac that
-  late int pressure;//ap suat
-  late int humidity;//do am
-  late var uvi;
-  late int visibility;//tam nhin xa
-  late var windspeed;//toc do gio
-
+class Weather {
+  num? id;
+  String? main;
+  String? description;
+  String? icon;
   late WeatherCondition condition;
-  late String description;
+  Weather({this.id, this.main, this.description, this.icon, required this.condition});
 
-  late var  min;
-  late var max;
+  Weather.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    main = json['main'];
+    description = WCondition(json['description']);
+    icon = json['icon'];
+    condition = mapStringToWeatherCondition(json['description']);
+  }
 
-  var date;
-
-  Current({required this.sunrise,required this.sunset, 
-  required this.temp,required this.feelslike, required this.pressure, 
-  required this.humidity,required this.uvi, required this.visibility,
-  required this.windspeed, required this.condition, required this.description,
-  required this.max, required this.min});
-  
-  factory Current.fromJson(Map<String, dynamic> json) {
-    // final newYearsDay = DateTime.fromMillisecondsSinceEpoch((json['current']['sunrise']) * 1000);
-    // print(newYearsDay);
-    // print('object');
-    // var cloudiness = json['current']['clouds'];
-    final weather = json['current']['weather'][0];
-    return Current(
-      sunrise: json['current']['sunrise'], 
-      sunset: json['current']['sunset'], 
-      temp: json['current']['temp'], 
-      feelslike: json['current']['feels_like'], 
-      pressure: json['current']['pressure'], 
-      humidity: json['current']['humidity'], 
-      uvi: json['current']['uvi'], 
-      visibility: json['current']['visibility'], 
-      windspeed: json['current']['wind_speed'],
-      condition: mapStringToWeatherCondition(weather['description']),
-      // condition: weather['description'],
-      description: WCondition(weather['description']) ,
-      min: json['daily'][0]['temp']['min'],
-      max: json['daily'][0]['temp']['max'],
-    );
-    
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['main'] = this.main;
+    data['description'] = this.description;
+    data['icon'] = this.icon;
+    data['description'] = this.condition;
+    return data;
   }
 
   static WCondition (String descriptionVN){
@@ -130,7 +103,5 @@ class Current {
 
     return condition;
   }
-
-  
 
 }

@@ -3,7 +3,7 @@ import 'package:flutter_app_weather/controller/hourly_controller.dart';
 import 'package:get/get.dart';
 
 import 'province_controller.dart';
-import 'temp_controller.dart';
+import 'current_controller.dart';
 
 class HomeBinding implements Bindings {
   @override
