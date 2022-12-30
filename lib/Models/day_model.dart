@@ -296,7 +296,7 @@ class Daily {
     } else if (337.5 < windDeg && windDeg < 360) {
       return 'Bắc tây bắc';
     }
-    return windDeg;
+    return 'windDeg';
   }
 }
 

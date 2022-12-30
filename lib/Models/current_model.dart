@@ -216,23 +216,19 @@ class Current {
 
   static windDegCondition(num windDeg) {
     if (windDeg == 0 && windDeg == 360) {
-      print('Bắc');
       return 'Bắc';
     } else if (0 < windDeg && windDeg <= 22.5) {
-      print('Bắc đông bắc');
       return 'Bắc đông bắc';
     } else if (22.5 < windDeg && windDeg <= 67.5) {
-      print('Đông bắc');
       return 'Đông bắc';
     } else if (67.5 < windDeg && windDeg < 90) {
       return 'Đông đông bắc';
     } else if (90 == windDeg) {
-      print('Đông');
       return 'Đông';
     } else if (90 < windDeg && windDeg <= 112.5) {
       return 'Đông đông nam';
     } else if (112.5 < windDeg && windDeg <= 157.5) {
-      return ('Đông nam');
+      return 'Đông nam';
     } else if (157.5 < windDeg && windDeg < 180) {
       return 'Nam đông nam';
     } else if (180 == windDeg) {

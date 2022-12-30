@@ -36,36 +36,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child: FutureBuilder(
-//           future:  _daily.get_daily(),
-//           builder: (context, snapshot) {
-//             if (snapshot.hasData) {
-//               print(snapshot.data!.length);
-//               return ListView.builder(
-//                 itemCount: snapshot.data!.length,
-//                 itemBuilder: (context, index) {
-//                 print(index);
-//                 if(index != 2){
-//                 return Column(
-//                   children: [
-//                     Text(index.toString()+ ':'+snapshot.data![index].date.toString()),
-//                     Text(index.toString()+ ':'+snapshot.data![index].temp.toString())
-//                   ],
-//                 );
-//                 }
-//                 return SizedBox();
-
-//               },);
-//             } else {
-
-//             return LinearProgressIndicator();
-//             }
-//         },)
-//       ),
-//     );
-
     initializeDateFormatting('vi');
     return Scaffold(
         drawer: Drawer(

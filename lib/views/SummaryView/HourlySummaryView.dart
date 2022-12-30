@@ -42,6 +42,7 @@ import 'package:flutter_app_weather/Models/day_model.dart';
 import 'package:flutter_app_weather/controller/current_controller.dart';
 import 'package:flutter_app_weather/controller/day_controller.dart';
 import '../../../widgets/mapStringToWeatherConditionToImage.dart';
+import '../DetailedView/HourlyDetailedView.dart';
 
 class HourlySummaryView extends StatefulWidget {
   @override
@@ -76,7 +77,13 @@ class _HourlySummaryViewState extends State<HourlySummaryView> {
                         style: appStyleText.textStyle18,
                       )),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HourlyDetailedView()),
+                        );
+                      },
                       child: Text('Thêm',
                           style: appStyleText.textStyle18
                               .copyWith(decoration: TextDecoration.underline))),
@@ -84,7 +91,8 @@ class _HourlySummaryViewState extends State<HourlySummaryView> {
               ),
               Container(
                 margin: EdgeInsets.only(bottom: 20),
-                padding: EdgeInsets.only(top: 40, bottom: 40, left: 20, right: 20),
+                padding:
+                    EdgeInsets.only(top: 40, bottom: 40, left: 20, right: 20),
                 decoration: BoxDecoration(
                     color: Color.fromARGB(255, 16, 4, 59).withOpacity(0.7),
                     borderRadius: BorderRadius.circular(20)),

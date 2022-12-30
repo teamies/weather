@@ -67,7 +67,7 @@ class _CurrentGridViewState extends State<CurrentGridView> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text(" ${snapshot.data!.current!.sunrise}",
+                                  child: Text(" ${snapshot.data!.current?.sunrise}",
                                       style: appStyleText.textStyle16),
                                 )
                               ],
@@ -230,7 +230,8 @@ class _CurrentGridViewState extends State<CurrentGridView> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text(" ${snapshot.data!.hourly![0].rain?.d1h}",
+                                      child: 
+                                      Text((snapshot.data!.hourly![0].rain?.d1h != null)? "${snapshot.data!.hourly![0].rain?.d1h}" : "0",
                                           style: appStyleText.textStyle16),
                                     )
                                   ],

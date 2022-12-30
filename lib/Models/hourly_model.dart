@@ -39,6 +39,7 @@ import 'weather_model.dart';
 
 class Hourly {
   String? dt;
+  String? dt_day;
   num? temp;
   num? feelsLike;
   num? pressure;
@@ -48,7 +49,7 @@ class Hourly {
   num? clouds;
   num? visibility;
   num? windSpeed;
-  num? windDeg;
+  String? windDeg;
   num? windGust;
   List<Weather>? weather;
   num? pop;
@@ -56,6 +57,7 @@ class Hourly {
 
   Hourly(
       {this.dt,
+      this.dt_day,
       this.temp,
       this.feelsLike,
       this.pressure,
@@ -73,6 +75,7 @@ class Hourly {
 
   Hourly.fromJson(Map<String, dynamic> json) {
     dt = DateFormat.Hm().format(DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000));
+    dt_day = DateFormat.yMd('vi').format(DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000));
     temp = json['temp'];
     feelsLike = json['feels_like'];
     pressure = json['pressure'];
@@ -82,7 +85,8 @@ class Hourly {
     clouds = json['clouds'];
     visibility = json['visibility'];
     windSpeed = json['wind_speed'];
-    windDeg = json['wind_deg'];
+    windDeg = windDegCondition(json['wind_deg']);
+    // windDeg = json['wind_deg'];
     windGust = json['wind_gust'];
     if (json['weather'] != null) {
       weather = <Weather>[];
@@ -119,12 +123,51 @@ class Hourly {
     return data;
   }
 
-  static amountrain (Rain rain){
-    if (rain == null ) {
-      return '0';
-    } 
-    return rain;
+  // static amountrain (Rain rain){
+  //   if (rain == null ) {
+  //     return '0';
+  //   } 
+  //   return rain;
+  // }
+
+  static windDegCondition(num windDeg1) {
+    if (windDeg1 == 0 && windDeg1 == 360) {
+      return 'Bắc';
+    } else if (0 < windDeg1 && windDeg1 <= 22.5) {
+      return 'Bắc đông bắc';
+    } else if (22.5 < windDeg1 && windDeg1 <= 67.5) {
+      return 'Đông bắc';
+    } else if (67.5 < windDeg1 && windDeg1 < 90) {
+      return 'Đông đông bắc';
+    } else if (90 == windDeg1) {
+      return 'Đông';
+    } else if (90 < windDeg1 && windDeg1 <= 112.5) {
+      return 'Đông đông nam';
+    } else if (112.5 < windDeg1 && windDeg1 <= 157.5) {
+      return 'Đông nam';
+    } else if (157.5 < windDeg1 && windDeg1 < 180) {
+      return 'Nam đông nam';
+    } else if (180 == windDeg1) {
+      return 'Nam';
+    } else if (180 < windDeg1 && windDeg1 <= 202.5) {
+      return 'Nam tây nam';
+    } else if (202.5 < windDeg1 && windDeg1 <= 247.5) {
+      return 'Tây nam';
+    } else if (247.5 < windDeg1 && windDeg1 < 270) {
+      return 'Tây tây nam';
+    } else if (270 == windDeg1) {
+      return 'Tây ';
+    } else if (270 < windDeg1 && windDeg1 <= 292.5) {
+      return 'Tây tây bắc';
+    } else if (292.5 < windDeg1 && windDeg1 <= 337.5) {
+      return 'Tây bắc';
+    } else if (337.5 < windDeg1 && windDeg1 < 360) {
+      return 'Bắc tây bắc';
+    }
+    return 'windDeg1';
   }
+
+
 }
 
 class Rain {
