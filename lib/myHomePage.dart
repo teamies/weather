@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_weather/views/SummaryView/HourlySummaryView.dart';
+import 'package:flutter_app_weather/views/seach_view.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_app_weather/chart/temperatureChart.dart';
@@ -33,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // TODO: implement initState
     super.initState();
   }
-
+bool toggleIcon = true;
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('vi');
@@ -76,7 +77,26 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showBottomSheet(
+                    context: context,
+                    builder: ( BuildContext context ) {
+                      return Container(
+                        height: 1200,
+                        child: TextField(
+                          // autofocus: true,
+                          keyboardType: TextInputType.number,
+                          // textInputAction: TextInputAction.continueAction,
+                        ),
+                      );
+                    }
+                );
+                  // Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => const searchView()),
+                  //       );
+                },
                 icon: const Icon(Icons.add_circle_outline),
                 color: Colors.white),
           ],
@@ -92,6 +112,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   image: AssetImage("assets/img/imgThienNhien1.jpg"))),
           child: ListView(
             children: [
+              ElevatedButton(onPressed: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: ( BuildContext context ) {
+                      return Container(
+                        height: 1200,
+                        child: TextField(
+                          autofocus: true,
+                        ),
+                      );
+                    }
+                );
+              } , child: Text('Show Bottom Sheet')),
               Column(
                 children: [
                   Container(

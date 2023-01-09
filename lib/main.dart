@@ -14,15 +14,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      initialRoute: '/home',
+    return MaterialApp(
+      // initialRoute: '/home',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-       getPages: [
-      //Simple GetPage
-      GetPage(name: '/home', page: () => const MyHomePage(title: '',), binding: HomeBinding() ),
+      home: MyHomePage(title: ''),
+    //    getPages: [
+    //   //Simple GetPage
+    //   GetPage(name: '/home', page: () => const MyHomePage(title: '',) ),
    
-    ]
+    // ]
     );  }
 }

@@ -14,7 +14,8 @@ class _searchViewState extends State<searchView> {
   Widget build(BuildContext context) {
     return Container(
       child: TextField(
-      
+      decoration: InputDecoration(),
+      autofocus: true,
       ),
     );
   }
