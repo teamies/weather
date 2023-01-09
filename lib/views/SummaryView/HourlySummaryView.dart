@@ -40,7 +40,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_weather/Models/day_model.dart';
 import 'package:flutter_app_weather/controller/current_controller.dart';
-import 'package:flutter_app_weather/controller/day_controller.dart';
+// import 'package:flutter_app_weather/controller/day_controller.dart';
 import '../../../widgets/mapStringToWeatherConditionToImage.dart';
 import '../DetailedView/HourlyDetailedView.dart';
 
@@ -101,6 +101,10 @@ class _HourlySummaryViewState extends State<HourlySummaryView> {
                   scrollDirection: Axis.horizontal,
                   itemCount: snapshot.data!.hourly!.length,
                   itemBuilder: (context, index) {
+                    int date = ((DateTime.now().millisecondsSinceEpoch) / 1000).toInt();
+                    int sunrise = snapshot.data!.daily![0].sunrise!.toInt();
+                    int sunset = snapshot.data!.daily![0].sunset!.toInt();
+
                     if (index != 24 &&
                         index != 25 &&
                         index != 26 &&
@@ -131,15 +135,16 @@ class _HourlySummaryViewState extends State<HourlySummaryView> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              snapshot.data!.hourly![index].dt.toString(),
+                              snapshot.data!.hourly![index].dt_hour.toString(),
                               style: appStyleText.textStyle16,
                             ),
                             Container(
                                 width: 40,
                                 height: 40,
-                                child: mapStringToWeatherConditionToImage(
-                                    snapshot.data!.hourly![0].weather![0]
-                                        .condition)),
+                                child: (
+                                  (date < sunrise) || (date > sunset))
+                                    ? mapStringToWeatherConditionToImageNight(snapshot.data!.hourly![index].weather![0].condition)
+                                    : mapStringToWeatherConditionToImageDay(snapshot.data!.hourly![index].weather![0].condition)),
                             Text(
                               snapshot.data!.hourly![index].temp!
                                       .toStringAsFixed(0) +

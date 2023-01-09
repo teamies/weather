@@ -30,6 +30,9 @@ class _PlatFormInfoState extends State<PlatFormInfo> {
       future: _current.getCurrent(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          int date = ((DateTime.now().millisecondsSinceEpoch)/1000).toInt();
+          int sunrise = snapshot.data!.daily![0].sunrise!.toInt();
+          int sunset = snapshot.data!.daily![0].sunset!.toInt();
           return 
           Container(
             height: 220,
@@ -44,9 +47,10 @@ class _PlatFormInfoState extends State<PlatFormInfo> {
                     height: 70,
                     width:  70,
                     child: 
-                    mapStringToWeatherConditionToImage(snapshot.data!.hourly![0].weather![0].condition)
-                    // Text(snapshot.data!.hourly![0].weather![0].condition.toString())
-
+                    ((date < sunrise) || (date > sunset))  
+                    ? mapStringToWeatherConditionToImageNight(snapshot .data!.hourly![0].weather![0].condition) 
+                    : mapStringToWeatherConditionToImageDay(snapshot .data!.hourly![0].weather![0].condition) 
+                       
                   ),
 
                   Padding(

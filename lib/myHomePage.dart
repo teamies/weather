@@ -46,11 +46,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     image: AssetImage("assets/img/troi-xanh.jpg"))),
             // color: Color.fromARGB(255, 22, 85, 136),
             child: ListView(
-              children: List.generate(menus.length, (index) {
-                return Center(
-                  child: drawerMenu(menu: menus[index]),
-                );
-              }),
+              children: [
+                drawerMenu()
+              ],
+              // children: List.generate(menus.length, (index) {
+              //   return Center(
+              //     child: drawerMenu(menu: menus[index]),
+              //   );
+              // }),
             ),
           ),
         ),

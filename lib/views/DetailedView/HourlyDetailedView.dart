@@ -18,12 +18,12 @@ class HourlyDetailedView extends StatefulWidget {
 }
 
 class _HourlyDetailedViewState extends State<HourlyDetailedView> {
-  late HourlyController _Hourly;
+  late CurrentController _Hourly;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _Hourly = new HourlyController();
+    _Hourly = new CurrentController();
   }
 
   @override
@@ -62,9 +62,9 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
         ));
   }
 
-  FutureBuilder<List<Hourly>> hourlyView() {
+  Widget hourlyView() {
     return FutureBuilder(
-      future: _Hourly.getHourly(),
+      future: _Hourly.getCurrent(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Column(
@@ -79,8 +79,13 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                 height: 200,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: snapshot.data!.length,
+                  itemCount: snapshot.data!.hourly!.length,
                   itemBuilder: (context, index) {
+
+                    int date = ((DateTime.now().millisecondsSinceEpoch) / 1000).toInt();
+                    int sunrise = snapshot.data!.daily![0].sunrise!.toInt();
+                    int sunset = snapshot.data!.daily![0].sunset!.toInt();
+
                     if (index != 24 &&
                         index != 25 &&
                         index != 26 &&
@@ -111,16 +116,20 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              snapshot.data![index].dt.toString(),
+                              snapshot.data!.hourly![index].dt_hour.toString(),
                               style: appStyleText.textStyle16,
                             ),
                             Container(
                                 width: 40,
                                 height: 40,
-                                child: mapStringToWeatherConditionToImage(
-                                    snapshot.data![0].weather![0].condition)),
+                                child: (
+                                  ((date < sunrise) || (date > sunset)) ? 
+                                  mapStringToWeatherConditionToImageNight(snapshot .data!.hourly![index].weather![0].condition) :
+                                  mapStringToWeatherConditionToImageDay(snapshot .data!.hourly![index].weather![0].condition)
+                                )
+                              ),
                             Text(
-                              snapshot.data![index].temp!.toStringAsFixed(0) +
+                              snapshot.data!.hourly![index].temp!.toStringAsFixed(0) +
                                   '\u00B0',
                               style: appStyleText.textStyle16,
                             ),
@@ -141,9 +150,9 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
     );
   }
 
-  FutureBuilder<List<Hourly>> hourlyDetailView() {
+  Widget hourlyDetailView() {
     return FutureBuilder(
-      future: _Hourly.getHourly(),
+      future: _Hourly.getCurrent(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Column(
@@ -152,8 +161,13 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                 height: 600,
                 child: ListView.builder(
                   // scrollDirection: Axis.horizontal,
-                  itemCount: snapshot.data!.length,
+                  itemCount: snapshot.data!.hourly!.length,
                   itemBuilder: (context, index) {
+
+                    int date = ((DateTime.now().millisecondsSinceEpoch) / 1000).toInt();
+                    int sunrise = snapshot.data!.daily![0].sunrise!.toInt();
+                    int sunset = snapshot.data!.daily![0].sunset!.toInt();
+
                     if (index != 24 &&
                         index != 25 &&
                         index != 26 &&
@@ -180,8 +194,8 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                         index != 47) {
                       return Container(
                         margin: EdgeInsets.only(bottom: 20, top: 30),
-                        padding: EdgeInsets.only(
-                            top: 30, bottom: 40,  right: 20),
+                        padding:
+                            EdgeInsets.only(top: 30, bottom: 40, right: 20),
                         decoration: BoxDecoration(
                             color:
                                 Color.fromARGB(255, 16, 4, 59).withOpacity(0.7),
@@ -198,15 +212,15 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                                     Expanded(
                                       flex: 1,
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            snapshot.data![index].dt.toString(),
+                                            snapshot.data!.hourly![index].dt_hour.toString(),
                                             style: appStyleText.textStyle16,
                                           ),
                                           Text(
-                                            // DateFormat.MMMEd('vi').add_jm().format(DateTime.parse(snapshot.data![index].dt.toString())),
-                                            snapshot.data![index].dt_day
+                                            snapshot.data!.hourly![index].dt_day
                                                 .toString(),
                                             style: appStyleText.textStyle16,
                                           ),
@@ -216,10 +230,11 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                                     Expanded(
                                       flex: 1,
                                       child: Text(
-                                        snapshot.data![index].temp!
+                                        snapshot.data!.hourly![index].temp!
                                                 .toStringAsFixed(0) +
                                             '\u00B0',
-                                        style: appStyleText.textStyle20.copyWith(fontSize: 40),
+                                        style: appStyleText.textStyle20
+                                            .copyWith(fontSize: 40),
                                       ),
                                     ),
                                     Expanded(
@@ -227,16 +242,20 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                                       child: Container(
                                           width: 70,
                                           height: 70,
-                                          child:
-                                              mapStringToWeatherConditionToImage(
-                                                  snapshot.data![0].weather![0]
-                                                      .condition)),
+                                          child: (
+                                            (date < sunrise) || (date > sunset) 
+                                            ? mapStringToWeatherConditionToImageNight(snapshot .data!.hourly![index].weather![0].condition) 
+                                            : mapStringToWeatherConditionToImageDay(snapshot .data!.hourly![index].weather![0].condition)
+                                          )
+                                        ),
                                     ),
                                   ],
                                 ),
                               ),
                             ),
-                            Spacer(flex: 1,),
+                            Spacer(
+                              flex: 1,
+                            ),
                             Expanded(
                               flex: 4,
                               // child: Container(
@@ -256,7 +275,7 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                                                 color: Colors.white))),
                                     child: Text(
                                       'Cảm giác thực: ' +
-                                          snapshot.data![index].feelsLike!
+                                          snapshot.data!.hourly![index].feelsLike!
                                               .toStringAsFixed(0) +
                                           '\u00B0',
                                       style: appStyleText.textStyle16,
@@ -273,7 +292,7 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                                                 color: Colors.white))),
                                     child: Text(
                                       'Nhiệt độ khí quyển: ' +
-                                          snapshot.data![index].dewPoint!
+                                          snapshot.data!.hourly![index].dewPoint!
                                               .toStringAsFixed(0) +
                                           '\u00B0',
                                       style: appStyleText.textStyle16,
@@ -290,7 +309,7 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                                                 color: Colors.white))),
                                     child: Text(
                                       'độ ẩm: ' +
-                                          snapshot.data![index].humidity!
+                                          snapshot.data!.hourly![index].humidity!
                                               .toString() +
                                           '%',
                                       style: appStyleText.textStyle16,
@@ -307,7 +326,7 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                                                 color: Colors.white))),
                                     child: Text(
                                       'Chỉ số tia cực tím: ' +
-                                          snapshot.data![index].uvi!.toString(),
+                                          snapshot.data!.hourly![index].uvi!.toString(),
                                       style: appStyleText.textStyle16,
                                     ),
                                   ),
@@ -322,7 +341,7 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                                                 color: Colors.white))),
                                     child: Text(
                                       'Áp suất: ' +
-                                          snapshot.data![index].pressure
+                                          snapshot.data!.hourly![index].pressure
                                               .toString() +
                                           ' hPa',
                                       style: appStyleText.textStyle16,
@@ -339,7 +358,7 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                                                 color: Colors.white))),
                                     child: Text(
                                       'Hướng gió: ' +
-                                          snapshot.data![index].windDeg
+                                          snapshot.data!.hourly![index].windDeg
                                               .toString(),
                                       style: appStyleText.textStyle16,
                                     ),
@@ -355,7 +374,7 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                                                 color: Colors.white))),
                                     child: Text(
                                       'Tốc độ gió: ' +
-                                          snapshot.data![index].windSpeed!
+                                          snapshot.data!.hourly![index].windSpeed!
                                               .toString() +
                                           ' m/s',
                                       style: appStyleText.textStyle16,
@@ -372,7 +391,7 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                                                 color: Colors.white))),
                                     child: Text(
                                       'Mây che phủ: ' +
-                                          snapshot.data![index].clouds!
+                                          snapshot.data!.hourly![index].clouds!
                                               .toString() +
                                           ' %',
                                       style: appStyleText.textStyle16,
@@ -388,8 +407,9 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                                                 width: 1,
                                                 color: Colors.white))),
                                     child: Text(
-                                      'Lượng mưa: ',
-                                      //  + snapshot.data![index].rain!.d1h.toString(),
+                                      (snapshot.data!.hourly![0].rain?.d1h != null)
+                                          ? "Lượng mưa: ${snapshot.data!.hourly![0].rain?.d1h} mm"
+                                          : "'Lượng mưa:  0 mm",
                                       style: appStyleText.textStyle16,
                                     ),
                                   ),

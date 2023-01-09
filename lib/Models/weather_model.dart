@@ -7,7 +7,8 @@ enum WeatherCondition {
   fewclouds, // dust, ash, fog, sand etc.
   scatteredclouds,
   brokenclouds,
-  sun,
+  overcastClouds,
+  clearSky,
   // lightCloud,
   // heavyCloud,
   // clear,
@@ -93,8 +94,12 @@ class Weather {
       case 'broken clouds':
         condition = WeatherCondition.brokenclouds;
         break;
-      case 'sun':
-        condition = WeatherCondition.sun;
+      
+      case 'overcast clouds':
+        condition = WeatherCondition.overcastClouds;
+        break;
+      case 'clear sky':
+        condition = WeatherCondition.clearSky;
         break;
       
       default:

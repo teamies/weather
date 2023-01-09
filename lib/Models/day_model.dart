@@ -1,169 +1,16 @@
-// import 'package:flutter/cupertino.dart';
-
-// class Daily {
-//   int? dt;
-//   int? sunrise;
-//   int? sunset;
-//   int? moonrise;
-//   int? moonset;
-//   num? moonPhase;
-//   //temp
-//   num? tempDay;
-//   num? tempmin;
-//   num? tempmax;
-//   num? tempNight;
-//   num? tempEve;
-//   num? tempMorn;
-
-//   // FeelsLike
-//   num? FLDay;
-//   num? FLNight;
-//   num? FLEve;
-//   num? FLMorn;
-
-//   num? pressure;
-//   num? humidity;
-//   num? dewPoint;
-//   num? windSpeed;
-//   String? windDeg;
-//   num? windGust;
-//   // List<Weather>? weather;
-//   // int? clouds;
-//   // int? pop;
-//   num? uvi;
-//   num? rain;
-//   num? snow;
-//   //weather
-//   num? id;
-//   String? main;
-//   String? description;
-//   String? icon;
-
-//   Daily(
-//       {this.dt,
-//       this.sunrise,
-//       this.sunset,
-//       this.moonrise,
-//       this.moonset,
-//       this.moonPhase,
-//       this.pressure,
-//       this.humidity,
-//       this.dewPoint,
-//       this.windSpeed,
-//       this.windDeg,
-//       this.windGust,
-//       // this.weather,
-//       // this.clouds,
-//       // this.pop,
-//       this.uvi,
-//       this.rain,
-//       this.snow,
-//       this.tempDay,
-//       this.tempEve,
-//       this.tempMorn,
-//       this.tempNight,
-//       this.FLDay,
-//       this.tempmin,
-//       this.tempmax,
-//       this.FLEve,
-//       this.FLMorn,
-//       this.FLNight,
-//       this.id,
-//       this.main,
-//       this.description,
-//       this.icon});
-
-//   factory Daily.fromJson(Map<String, dynamic> json) {
-//     // final daily = json['daily'][0];
-//     return Daily(
-//       dt: json['dt'],
-//       sunrise: json['sunrise'],
-//       sunset: json['sunset'],
-//       moonrise: json['moonrise'],
-//       moonset: json['moonset'],
-//       moonPhase: json['moon_phase'],
-//       pressure: json['pressure'],
-//       humidity: json['humidity'],
-//       dewPoint: json['dew_point'],
-//       windSpeed: json['wind_speed'],
-//       windDeg: windDegCondition(json['wind_deg']),
-//       windGust: json['wind_gust'],
-//       uvi: json['uvi'],
-//       rain: json['rain'],
-//       snow: json['snow'],
-//       tempDay: json['temp']['day'],
-//       tempmin: json['temp']['min'],
-//       tempmax: json['temp']['max'],
-//       tempNight: json['temp']['night'],
-//       tempEve: json['temp']['eve'],
-//       tempMorn: json['temp']['morn'],
-//       FLDay: json['feels_like']['day'],
-//       FLNight: json['feels_like']['night'],
-//       FLEve: json['feels_like']['eve'],
-//       FLMorn: json['feels_like']['morn'],
-//       id: json['weather'][0]['id'],
-//       main: json['weather'][0]['main'],
-//       description: json['weather'][0]['description'],
-//       icon: json['weather'][0]['icon'],
-//     );
-//   }
-
-//   static windDegCondition(num windDeg) {
-//     if (windDeg == 0 && windDeg == 360) {
-//       print('Bắc');
-//       return 'Bắc';
-//     } else if (0 < windDeg && windDeg <= 22.5) {
-//       print('Bắc đông bắc');
-//       return 'Bắc đông bắc';
-//     } else if (22.5 < windDeg && windDeg <= 67.5) {
-//       print('Đông bắc');
-//       return 'Đông bắc';
-//     } else if (67.5 < windDeg && windDeg < 90) {
-//       return 'Đông đông bắc';
-//     } else if (90 == windDeg) {
-//       print('Đông');
-//       return 'Đông';
-//     } else if (90 < windDeg && windDeg <= 112.5) {
-//       return 'Đông đông nam';
-//     } else if (112.5 < windDeg && windDeg <= 157.5) {
-//       return ('Đông nam');
-//     } else if (157.5 < windDeg && windDeg < 180) {
-//       return 'Nam đông nam';
-//     } else if (180 == windDeg) {
-//       return 'Nam';
-//     } else if (180 < windDeg && windDeg <= 202.5) {
-//       return 'Nam tây nam';
-//     } else if (202.5 < windDeg && windDeg <= 247.5) {
-//       return 'Tây nam';
-//     } else if (247.5 < windDeg && windDeg < 270) {
-//       return 'Tây tây nam';
-//     } else if (270 == windDeg) {
-//       return 'Tây ';
-//     } else if (270 < windDeg && windDeg <= 292.5) {
-//       return 'Tây tây bắc';
-//     } else if (292.5 < windDeg && windDeg <= 337.5) {
-//       return 'Tây bắc';
-//     } else if (337.5 < windDeg && windDeg < 360) {
-//       return 'Bắc tây bắc';
-//     }
-//     return windDeg;
-//   }
-// }
-
-
-
-
-
-
 import 'package:flutter_app_weather/Models/weather_model.dart';
+import 'package:intl/intl.dart';
 
 class Daily {
-  num? dt;
+  String? dt;
+  String? dtday; 
+  String? sunrise_hour;
   num? sunrise;
+  String? sunset_hour;
   num? sunset;
   num? moonrise;
   num? moonset;
-  num? moonPhase;
+  String? moonPhase;
   Temp? temp;
   FeelsLike? feelsLike;
   num? pressure;
@@ -180,7 +27,10 @@ class Daily {
 
   Daily(
       {this.dt,
+      this.dtday,
+      this.sunrise_hour,
       this.sunrise,
+      this.sunset_hour,
       this.sunset,
       this.moonrise,
       this.moonset,
@@ -200,12 +50,16 @@ class Daily {
       this.uvi});
 
   Daily.fromJson(Map<String, dynamic> json) {
-    dt = json['dt'];
+    dt = DateFormat.yMd('vi').format(DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000));
+    dtday = DateFormat.Md('vi').format(DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000));
+    // dt = json['dt'];
+    sunrise_hour = DateFormat.jm().format(DateTime.fromMillisecondsSinceEpoch(json['sunrise'] * 1000));
+    sunset_hour = DateFormat.jm().format(DateTime.fromMillisecondsSinceEpoch(json['sunset'] * 1000));
     sunrise = json['sunrise'];
     sunset = json['sunset'];
     moonrise = json['moonrise'];
     moonset = json['moonset'];
-    moonPhase = json['moon_phase'];
+    moonPhase = moonPhaseCondition(json['moon_phase']);
     temp = json['temp'] != null ? new Temp.fromJson(json['temp']) : null;
     feelsLike = json['feels_like'] != null
         ? new FeelsLike.fromJson(json['feels_like'])
@@ -260,18 +114,14 @@ class Daily {
 
   static windDegCondition(num windDeg) {
     if (windDeg == 0 && windDeg == 360) {
-      print('Bắc');
       return 'Bắc';
     } else if (0 < windDeg && windDeg <= 22.5) {
-      print('Bắc đông bắc');
       return 'Bắc đông bắc';
     } else if (22.5 < windDeg && windDeg <= 67.5) {
-      print('Đông bắc');
       return 'Đông bắc';
     } else if (67.5 < windDeg && windDeg < 90) {
       return 'Đông đông bắc';
     } else if (90 == windDeg) {
-      print('Đông');
       return 'Đông';
     } else if (90 < windDeg && windDeg <= 112.5) {
       return 'Đông đông nam';
@@ -297,6 +147,22 @@ class Daily {
       return 'Bắc tây bắc';
     }
     return 'windDeg';
+  }
+
+
+  static moonPhaseCondition(num moonPhase) {
+    if (moonPhase == 0 && moonPhase == 1) {
+      return ' Trăng non';
+    } else if (0 < moonPhase && moonPhase < 0.25 || 0.75 < moonPhase && moonPhase < 1) {
+      return 'Trăng lưỡi liềm';
+    } else if (0.25 == moonPhase ) {
+      return 'Bán nguyệt đầu tháng';
+    }else if (0.75 == moonPhase ) {
+      return 'Bán nguyệt cuối tháng';
+    }else if (0.5 == moonPhase ) {
+      return 'Trăng tròn';
+    }
+    return 'Trăng khuyết';
   }
 }
 

@@ -33,7 +33,8 @@ class _windPressureState extends State<windPressure> {
         if (snapshot.hasData) {
           return Container(
             margin: const EdgeInsets.only(top: 25, bottom: 25),
-            padding: const EdgeInsets.only(right: 15, left: 15, bottom: 15),
+            // padding: const EdgeInsets.only(right: 15, left: 15, bottom: 15),
+            padding: EdgeInsets.all(30),
             decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 16, 4, 59).withOpacity(0.7),
                 borderRadius: BorderRadius.circular(
@@ -53,7 +54,7 @@ class _windPressureState extends State<windPressure> {
                         children: [
                           const Text(
                             'Gió và áp suất',
-                            style: appStyleText.textStyle18,
+                            style: appStyleText.textStyle20,
                           )
                         ],
                       ),
@@ -71,8 +72,8 @@ class _windPressureState extends State<windPressure> {
                           ),
                           Column(
                             children: [
-                              Text(snapshot.data!.current!.windDeg.toString(),
-                                  style: appStyleText.textStyle16),
+                              Text(snapshot.data!.current!.windDeg!.toString(),
+                                  style: appStyleText.textStyle18),
                               Text(snapshot.data!.current!.windSpeed.toString() + ' m/s',
                                   style: appStyleText.textStyle16),
                             ],
@@ -86,7 +87,7 @@ class _windPressureState extends State<windPressure> {
                             children: [
                               const Text(
                                 ' Áp suất',
-                                style: appStyleText.textStyle16,
+                                style: appStyleText.textStyle18,
                               ),
                               Text(
                                 '${snapshot.data!.current!.pressure} hPa',

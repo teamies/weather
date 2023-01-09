@@ -1,16 +1,15 @@
-// import 'package:exapi/models/province_model.dart';
-// import 'package:exapi/models/new.dart';
-import 'package:flutter_app_weather/Models/new.dart';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../Models/apiWeather_model.dart';
 import '../config/textstyle.dart';
 
 class CurrentController {
   Future<apiWeather> getCurrent() async {
    final response = await http.get(Uri.parse(
-        url + '?lat=21.592477&lon=105.8435398&units=metric&' + api_key2));
+        url + '/onecall?lat=21.592477&lon=105.8435398&units=metric&' + api_key2));
     if (response.statusCode == 200) {
       print(response.body);
     } else {
@@ -22,3 +21,43 @@ class CurrentController {
 
   }
 }
+
+// import 'dart:convert';
+// import 'package:flutter_app_weather/Models/apiWeather_model.dart';
+// import 'package:http/http.dart' as http;
+// import 'dart:developer';
+//  import '../config/textstyle.dart';
+// import '../Models/Location.dart';
+// import 'Service/WeatherApi.dart';
+
+
+// class CurrentController{
+
+//   Future<Location> getLocation(String city) async {
+//     final requestUrl = '$url/weather?q=$city&$api_key2';
+//     final response = await http.get(Uri.parse(requestUrl));
+//     // final response = await this.httpClient.get(Uri.encodeFull(requestUrl));
+
+//     if (response.statusCode != 200) {
+//       throw Exception(
+//           'error retrieving location for city $city: ${response.statusCode}');
+//     }
+
+//     return Location.fromJson(jsonDecode(response.body));
+//   }
+
+//   @override
+//   Future<apiWeather> getCurrent(Location location) async {
+//     final requestUrl =
+//         '$url/onecall?lat=${location.lat}&lon=${location.lon}&units=metric&$api_key2';
+//     final response = await http.get(Uri.parse(requestUrl));
+//     // final response = await this.httpClient.get(Uri.encodeFull(requestUrl));
+
+//     if (response.statusCode != 200) {
+//       throw Exception('error retrieving weather: ${response.statusCode}');
+//     }
+
+//     return apiWeather.fromJson(jsonDecode(response.body));
+//   }
+// }
+

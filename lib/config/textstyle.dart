@@ -28,7 +28,7 @@ class appStyleText{
     fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold
   );
 }
-const url = 'https://api.openweathermap.org/data/2.5/onecall';
+const url = 'https://api.openweathermap.org/data/2.5';
 const api_key = 'appid=ac2e59088cbe65dddd76cc799a3f7efb';
 const api_key2 = 'appid=0b02ee1c6dd9dafd7a2a8a0780323cc2';
 // 0b02ee1c6dd9dafd7a2a8a0780323cc2

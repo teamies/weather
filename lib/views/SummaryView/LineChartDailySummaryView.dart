@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_weather/Models/weather_model.dart';
 import 'package:flutter_app_weather/config/textstyle.dart';
+import 'package:flutter_app_weather/views/DetailedView/DailyDetailedView.dart';
 import 'package:intl/intl.dart';
 import 'dart:math' as math;
 import '../../controller/day_controller.dart';
@@ -18,6 +19,7 @@ class LineChartDailySummaryView extends StatefulWidget {
 class _LineChartDailySummaryViewState extends State<LineChartDailySummaryView> {
   double? miny;
   double? maxy;
+  int? sunrise, sunset,date;
   var icond0, icond1, icond2, icond3, icond4, icond5, icond6, icond7;
   late DailyController _daily;
   @override
@@ -50,22 +52,19 @@ class _LineChartDailySummaryViewState extends State<LineChartDailySummaryView> {
       future: _daily.get_daily(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          icond0 = mapStringToWeatherConditionToImage(
-              snapshot.data![0].weather![0].condition);
-          icond1 = mapStringToWeatherConditionToImage(
-              snapshot.data![1].weather![0].condition);
-          icond2 = mapStringToWeatherConditionToImage(
-              snapshot.data![2].weather![0].condition);
-          icond3 = mapStringToWeatherConditionToImage(
-              snapshot.data![3].weather![0].condition);
-          icond4 = mapStringToWeatherConditionToImage(
-              snapshot.data![4].weather![0].condition);
-          icond5 = mapStringToWeatherConditionToImage(
-              snapshot.data![5].weather![0].condition);
-          icond6 = mapStringToWeatherConditionToImage(
-              snapshot.data![6].weather![0].condition);
-          icond7 = mapStringToWeatherConditionToImage(
-              snapshot.data![7].weather![0].condition);
+
+          sunrise = snapshot.data![0].sunrise!.toInt();
+          sunset = snapshot.data![0].sunset!.toInt();
+          date = ((DateTime.now().millisecondsSinceEpoch)/1000).toInt();
+
+          icond0 = ((date! < sunrise!) || (date! > sunset!))? mapStringToWeatherConditionToImageNight(snapshot .data![0].weather![0].condition) :mapStringToWeatherConditionToImageDay(snapshot .data![0].weather![0].condition);
+          icond1 = ((date! < sunrise!) || (date! > sunset!))? mapStringToWeatherConditionToImageNight(snapshot .data![1].weather![0].condition) :mapStringToWeatherConditionToImageDay(snapshot .data![1].weather![0].condition);
+          icond2 = ((date! < sunrise!) || (date! > sunset!))? mapStringToWeatherConditionToImageNight(snapshot .data![2].weather![0].condition) :mapStringToWeatherConditionToImageDay(snapshot .data![2].weather![0].condition);
+          icond3 = ((date! < sunrise!) || (date! > sunset!))? mapStringToWeatherConditionToImageNight(snapshot .data![3].weather![0].condition) :mapStringToWeatherConditionToImageDay(snapshot .data![3].weather![0].condition);
+          icond4 = ((date! < sunrise!) || (date! > sunset!))? mapStringToWeatherConditionToImageNight(snapshot .data![4].weather![0].condition) :mapStringToWeatherConditionToImageDay(snapshot .data![4].weather![0].condition);
+          icond5 = ((date! < sunrise!) || (date! > sunset!))? mapStringToWeatherConditionToImageNight(snapshot .data![5].weather![0].condition) :mapStringToWeatherConditionToImageDay(snapshot .data![5].weather![0].condition);
+          icond6 = ((date! < sunrise!) || (date! > sunset!))? mapStringToWeatherConditionToImageNight(snapshot .data![6].weather![0].condition) :mapStringToWeatherConditionToImageDay(snapshot .data![6].weather![0].condition);
+          icond7 = ((date! < sunrise!) || (date! > sunset!))? mapStringToWeatherConditionToImageNight(snapshot .data![7].weather![0].condition) :mapStringToWeatherConditionToImageDay(snapshot .data![7].weather![0].condition);
 
           miny = [
                 snapshot.data![0].temp!.min!.toDouble(),
@@ -96,6 +95,7 @@ class _LineChartDailySummaryViewState extends State<LineChartDailySummaryView> {
             children: [
               Row(
                 children: [
+                  
                   const Expanded(
                       flex: 1,
                       child: Text(
@@ -103,7 +103,13 @@ class _LineChartDailySummaryViewState extends State<LineChartDailySummaryView> {
                         style: appStyleText.textStyle18,
                       )),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const DailyDetailedView()),
+                        );
+                      },
                       child: Text('Thêm',
                           style: appStyleText.textStyle18
                               .copyWith(decoration: TextDecoration.underline))),
@@ -565,7 +571,7 @@ class _LineChartDailySummaryViewState extends State<LineChartDailySummaryView> {
               style: appStyleText.textStyle16,
             ),
             Container(
-              height: 40,
+              height:40,
               width: 40,
               child: icond6,
             )

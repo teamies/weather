@@ -38,7 +38,8 @@ import 'package:intl/intl.dart';
 import 'weather_model.dart';
 
 class Hourly {
-  String? dt;
+  num? dt;
+  String? dt_hour;
   String? dt_day;
   num? temp;
   num? feelsLike;
@@ -57,6 +58,7 @@ class Hourly {
 
   Hourly(
       {this.dt,
+      this.dt_hour,
       this.dt_day,
       this.temp,
       this.feelsLike,
@@ -74,7 +76,8 @@ class Hourly {
       this.rain});
 
   Hourly.fromJson(Map<String, dynamic> json) {
-    dt = DateFormat.Hm().format(DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000));
+    dt = json['dt'];
+    dt_hour = DateFormat.Hm().format(DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000));
     dt_day = DateFormat.yMd('vi').format(DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000));
     temp = json['temp'];
     feelsLike = json['feels_like'];
