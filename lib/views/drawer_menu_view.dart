@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_weather/config/textstyle.dart';
+import 'package:flutter_app_weather/views/MenuView/Notification_view.dart';
+import 'package:flutter_app_weather/views/MenuView/setting_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 // class Menu {
 //   final IconData icon;
@@ -68,22 +71,40 @@ class drawerMenu extends StatelessWidget{
           ),
           Container(
             height: 70,
-            child: Row(
-              children:
-              [
-                Expanded(flex: 1, child: Icon(Icons.settings, color: Colors.white)),
-                Expanded(flex: 4, child: Text("Cài đặt",style: appStyleText.textStyle18))
-              ]
+            child: GestureDetector(
+              onTap: () {
+                 Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SettingView()),
+                        );
+              },
+              child: Row(
+                children:
+                [
+                  Expanded(flex: 1, child: Icon(Icons.settings, color: Colors.white)),
+                  Expanded(flex: 4, child: Text("Cài đặt",style: appStyleText.textStyle18))
+                ]
+              ),
             ),
           ),
           Container(
             height: 70,
-            child: Row(
-              children:
-              [
-                Expanded(flex: 1, child: Icon(Icons.notifications, color: Colors.white)),
-                Expanded(flex: 4, child: Text("Thông báo",style: appStyleText.textStyle18))
-              ]
+            child: GestureDetector(
+              onTap: () {
+                 Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NotificationView()),
+                        );
+              },
+              child: Row(
+                children:
+                [
+                  Expanded(flex: 1, child: Icon(Icons.notifications, color: Colors.white)),
+                  Expanded(flex: 4, child: Text("Thông báo",style: appStyleText.textStyle18))
+                ]
+              ),
             ),
           ),
           Container(

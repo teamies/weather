@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_weather/views/SummaryView/HourlySummaryView.dart';
-import 'package:flutter_app_weather/views/seach_view.dart';
+import 'package:flutter_app_weather/views/MenuView/seach_view.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_app_weather/chart/temperatureChart.dart';
@@ -39,118 +39,112 @@ bool toggleIcon = true;
   Widget build(BuildContext context) {
     initializeDateFormatting('vi');
     return Scaffold(
-        drawer: Drawer(
-          child: Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage("assets/img/troi-xanh.jpg"))),
-            // color: Color.fromARGB(255, 22, 85, 136),
-            child: ListView(
-              children: [
-                drawerMenu()
-              ],
-              // children: List.generate(menus.length, (index) {
-              //   return Center(
-              //     child: drawerMenu(menu: menus[index]),
-              //   );
-              // }),
-            ),
-          ),
-        ),
-        appBar: AppBar(
-          backgroundColor: const Color(0xff123EB9),
-          // backgroundColor: Color.fromARGB(255, 18,62,185),
-          //         ),
-          title: Center(
-            child: Column(
-              children: [
-                Text('Thái Nguyên',
-                    style: appStyleText.textStyle20
-                        .copyWith(fontWeight: FontWeight.bold)),
-                Text(
-                  DateFormat.MMMEd('vi').add_jm().format(DateTime.now()),
-                  style: appStyleText.textStyle16,
-                )
-              ],
-            ),
-          ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  showBottomSheet(
-                    context: context,
-                    builder: ( BuildContext context ) {
-                      return Container(
-                        height: 1200,
-                        child: TextField(
-                          // autofocus: true,
-                          keyboardType: TextInputType.number,
-                          // textInputAction: TextInputAction.continueAction,
-                        ),
-                      );
-                    }
-                );
-                  // Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //             builder: (context) => const searchView()),
-                  //       );
-                },
-                icon: const Icon(Icons.add_circle_outline),
-                color: Colors.white),
-          ],
-        ),
-
-        
-        body: Container(
-          padding: const EdgeInsets.only(top: 10,bottom: 20, left: 10, right: 10),
-          // color: Colors.blue.shade200,
+      drawer: Drawer(
+        child: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage("assets/img/imgThienNhien1.jpg"))),
+                  image: AssetImage("assets/img/troi-xanh.jpg"))),
+          // color: Color.fromARGB(255, 22, 85, 136),
           child: ListView(
             children: [
-              ElevatedButton(onPressed: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: ( BuildContext context ) {
-                      return Container(
-                        height: 1200,
-                        child: TextField(
-                          autofocus: true,
-                        ),
-                      );
-                    }
-                );
-              } , child: Text('Show Bottom Sheet')),
-              Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 20, bottom: 20),
-                    child:  PlatFormInfo(),
-                  ),
-                  HourlySummaryView(),
-                  CurrentGridView(),
-
-                  // DailySummaryView(),
-                  
-                  windPressure(),
-                  
-                  // ForecastDailyView()
-                  // Container(
-                  //   height: 400,
-                  //   child: DailyView(),
-                  // ),
-
-                  // temperatureChart(),
-                  LineChartDailySummaryView()
-                  // LineChartSample1()
-                ],
-              ),
+              drawerMenu()
+            ],
+            // children: List.generate(menus.length, (index) {
+            //   return Center(
+            //     child: drawerMenu(menu: menus[index]),
+            //   );
+            // }),
+          ),
+        ),
+      ),
+      appBar: AppBar(
+        backgroundColor: const Color(0xff123EB9),
+        // backgroundColor: Color.fromARGB(255, 18,62,185),
+        //         ),
+        title: Center(
+          child: Column(
+            children: [
+              Text('Thái Nguyên',
+                  style: appStyleText.textStyle20
+                      .copyWith(fontWeight: FontWeight.bold)),
+              Text(
+                DateFormat.MMMEd('vi').add_jm().format(DateTime.now()),
+                style: appStyleText.textStyle16,
+              )
             ],
           ),
-        ));
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  elevation: 0,
+                  isScrollControlled: true,
+                  builder: ( BuildContext context ) {
+                    return Container(
+                      height: 600,
+                      child: TextField(
+                        // autofocus: true,
+                        keyboardType: TextInputType.text,
+                        // textInputAction: TextInputAction.continueAction,
+                      ),
+                    );
+                  }
+              );
+                // Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => const searchView()),
+                //       );
+              },
+              icon: const Icon(Icons.add_circle_outline),
+              color: Colors.white),
+        ],
+      ),
+
+      
+      body: Container(
+        padding: const EdgeInsets.only(top: 10,bottom: 20, left: 10, right: 10),
+        // color: Colors.blue.shade200,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage("assets/img/imgThienNhien1.jpg"))),
+        child: ListView(
+          children: [
+            ElevatedButton(onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: ( BuildContext context ) {
+                    return Container(
+                      height: 1200,
+                      child: TextField(
+                        autofocus: true,
+                      ),
+                    );
+                  }
+              );
+            } , child: Text('Show Bottom Sheet')),
+            Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 20, bottom: 20),
+                  child:  PlatFormInfo(),
+                ),
+                HourlySummaryView(),
+                CurrentGridView(),
+
+                
+                windPressure(),
+                
+                LineChartDailySummaryView()
+              ],
+            ),
+          ],
+        ),
+      )
+    );
   }
 }

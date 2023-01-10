@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'day_model.dart';
 import 'hourly_model.dart';
 
-class apiWeather {
+class allWeather {
   num? lat;
   num? lon;
   String? timezone;
@@ -14,7 +14,7 @@ class apiWeather {
   List<Hourly>? hourly;
   List<Daily>? daily;
 
-  apiWeather(
+  allWeather(
       {this.lat,
       this.lon,
       this.timezone,
@@ -24,7 +24,7 @@ class apiWeather {
       this.hourly,
       this.daily});
 
-  apiWeather.fromJson(Map<String, dynamic> json) {
+  allWeather.fromJson(Map<String, dynamic> json) {
     lat = json['lat'];
     lon = json['lon'];
     timezone = json['timezone'];

@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import '../Models/apiWeather_model.dart';
+import '../Models/allWeather_model.dart';
 import '../config/textstyle.dart';
 
 class CurrentController {
-  Future<apiWeather> getCurrent() async {
+  Future<allWeather> getCurrent() async {
    final response = await http.get(Uri.parse(
         url + '/onecall?lat=21.592477&lon=105.8435398&units=metric&' + api_key2));
     if (response.statusCode == 200) {
@@ -17,7 +17,7 @@ class CurrentController {
         // then throw an exception.
       // throw Exception('Failed to load Current');
     }
-      return apiWeather.fromJson(jsonDecode(response.body));
+      return allWeather.fromJson(jsonDecode(response.body));
 
   }
 }

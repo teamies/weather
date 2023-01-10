@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_app_weather/Models/current_model.dart';
-import 'package:flutter_app_weather/Models/apiWeather_model.dart';
+import 'package:flutter_app_weather/Models/allWeather_model.dart';
 import 'package:flutter_app_weather/config/textstyle.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -313,7 +313,7 @@ class _CurrentGridViewState extends State<CurrentGridView> {
   }
 
   // ignore: non_constant_identifier_names
-  FutureBuilder<apiWeather> Row3() {
+  FutureBuilder<allWeather> Row3() {
     return FutureBuilder(
       future: _current.getCurrent(),
       builder: (context, snapshot) {
