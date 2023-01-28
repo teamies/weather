@@ -2,7 +2,10 @@ import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter_app_weather/config/textstyle.dart';
+import 'package:flutter_app_weather/myHomePage.dart';
+import 'package:flutter_app_weather/states/settingstate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 // import 'package:flutter/src/widgets/framework.dart';
 
@@ -18,9 +21,12 @@ class _SettingViewState extends State<SettingView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color(0xff123EB9),
-          // backgroundColor: Color.fromARGB(255, 18,62,185),
-          //         ),
+          backgroundColor: const Color(0xff123EB9),leading: IconButton(
+            onPressed: (){
+              Navigator.pop(context);
+              Navigator.pop(context);
+            }, 
+            icon: Icon(Icons.arrow_back_outlined)) ,
           title: Center(
             child: Column(
               children: [
@@ -36,13 +42,35 @@ class _SettingViewState extends State<SettingView> {
               const EdgeInsets.only(top: 10, bottom: 20, left: 10, right: 10),
           // color: Colors.blue.shade200,
           decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/img/imgThienNhien1.jpg"))),
-
-          child: Column(
-            children: [temperature(), rain(), windspeed(), pressure()],
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[
+                Color(0xff123EB9),
+                Color(0xFF42A5F5),
+              ], // Gradient from https://learnui.design/tools/gradient-generator.html
+              tileMode: TileMode.mirror,
+            ),
           ),
+          child: Column(
+            children: [temperature(), rain(), windspeed(), pressure(),
+              Container(
+                margin: EdgeInsets.only(top: 150),
+                child: TextButton(
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(title: '',)));
+                  }, 
+                  // ignore: sort_child_properties_last
+                  child: Container(
+                    padding: const EdgeInsets.only(top: 5, bottom: 5, left: 40, right: 40),
+                    child: const Text('OK', style: appStyleText.textStyle24b,)),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))),
+                    backgroundColor:  MaterialStateProperty.all<Color>(Color.fromARGB(255, 2, 16, 97)),),
+                ),
+              )
+            ],
+            ),
         ));
   }
 
@@ -52,7 +80,6 @@ class _SettingViewState extends State<SettingView> {
         children: [
           Row(
             children: [
-              // Image.asset('assets/img/imgweather/temp.png',width: 40,height: 40,),
               Container(
                   padding: EdgeInsets.only(right: 15),
                   child: FaIcon(
@@ -76,18 +103,27 @@ class _SettingViewState extends State<SettingView> {
             children: [
               ButtonBarEntry(
                   onTap: () => print('First item tapped'),
-                  child: Text(
+                  child: const Text(
                     'F',
                     style: appStyleText.textStyle18b,
                   )),
               ButtonBarEntry(
                   onTap: () => print('Second item tapped'),
-                  child: Text(
+                  child: const Text(
                     'C',
                     style: appStyleText.textStyle18b,
                   )),
             ],
           ),
+
+          // ListTile(
+          //   title: Text('data'),
+          //   isThreeLine: true,
+          //   subtitle: Text(SettingsState.temperatureUnit == TemperatureUnit.Celsius ? 'celsius' :'fahrenheit'),
+          //   trailing: Switch(
+          //     value: SettingsState.temperatureUnit == TemperatureUnit.Celsius, 
+          //     onChanged: onChanged),
+          // )
         ],
       ),
     );

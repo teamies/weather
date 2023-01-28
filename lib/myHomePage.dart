@@ -85,19 +85,10 @@ bool toggleIcon = true;
                   builder: ( BuildContext context ) {
                     return Container(
                       height: 600,
-                      child: TextField(
-                        // autofocus: true,
-                        keyboardType: TextInputType.text,
-                        // textInputAction: TextInputAction.continueAction,
-                      ),
+                      child: searchView()
                     );
                   }
               );
-                // Navigator.push(
-                //         context,
-                //         MaterialPageRoute(
-                //             builder: (context) => const searchView()),
-                //       );
               },
               icon: const Icon(Icons.add_circle_outline),
               color: Colors.white),
@@ -114,19 +105,6 @@ bool toggleIcon = true;
                 image: AssetImage("assets/img/imgThienNhien1.jpg"))),
         child: ListView(
           children: [
-            ElevatedButton(onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: ( BuildContext context ) {
-                    return Container(
-                      height: 1200,
-                      child: TextField(
-                        autofocus: true,
-                      ),
-                    );
-                  }
-              );
-            } , child: Text('Show Bottom Sheet')),
             Column(
               children: [
                 Container(
