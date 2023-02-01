@@ -31,4 +31,5 @@ class appStyleText{
 const url = 'https://api.openweathermap.org/data/2.5';
 const api_key = 'appid=ac2e59088cbe65dddd76cc799a3f7efb';
 const api_key2 = 'appid=0b02ee1c6dd9dafd7a2a8a0780323cc2';
+const urlLocation = 'http://api.openweathermap.org/geo/1.0';
 // 0b02ee1c6dd9dafd7a2a8a0780323cc2

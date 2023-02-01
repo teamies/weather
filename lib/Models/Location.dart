@@ -1,15 +1,18 @@
 class Location {
+  final String name;
   final double lon;
   final double lat;
 
   Location({
+    required this.name,
     required this.lon,
     required this.lat,
   });
 
   static Location fromJson(dynamic json) {
     return Location(
-        lon: json['coord']['lon'].toDouble(),
-        lat: json['coord']['lat'].toDouble());
+        name: json['name'],
+        lon: json['lon'].toDouble(),
+        lat: json['lat'].toDouble());
   }
 }

@@ -1,9 +1,9 @@
 import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter_app_weather/chart/temperatureChart.dart';
 import 'package:flutter_app_weather/config/textstyle.dart';
 import 'package:flutter_app_weather/myHomePage.dart';
-import 'package:flutter_app_weather/states/settingstate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -17,6 +17,7 @@ class SettingView extends StatefulWidget {
 }
 
 class _SettingViewState extends State<SettingView> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

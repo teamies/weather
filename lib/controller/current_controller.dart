@@ -23,20 +23,20 @@ class CurrentController {
 }
 
 // import 'dart:convert';
-// import 'package:flutter_app_weather/Models/apiWeather_model.dart';
 // import 'package:http/http.dart' as http;
 // import 'dart:developer';
-//  import '../config/textstyle.dart';
+//  import '../Models/allWeather_model.dart';
+// import '../config/textstyle.dart';
 // import '../Models/Location.dart';
 // import 'Service/WeatherApi.dart';
 
 
 // class CurrentController{
 
+  
 //   Future<Location> getLocation(String city) async {
-//     final requestUrl = '$url/weather?q=$city&$api_key2';
+//     final requestUrl = urlLocation + '/direct?q='+ city + api_key2;
 //     final response = await http.get(Uri.parse(requestUrl));
-//     // final response = await this.httpClient.get(Uri.encodeFull(requestUrl));
 
 //     if (response.statusCode != 200) {
 //       throw Exception(
@@ -47,7 +47,7 @@ class CurrentController {
 //   }
 
 //   @override
-//   Future<apiWeather> getCurrent(Location location) async {
+//   Future<allWeather> getCurrent(Location location) async {
 //     final requestUrl =
 //         '$url/onecall?lat=${location.lat}&lon=${location.lon}&units=metric&$api_key2';
 //     final response = await http.get(Uri.parse(requestUrl));
@@ -57,7 +57,7 @@ class CurrentController {
 //       throw Exception('error retrieving weather: ${response.statusCode}');
 //     }
 
-//     return apiWeather.fromJson(jsonDecode(response.body));
+//     return allWeather.fromJson(jsonDecode(response.body));
 //   }
 // }
 

@@ -77,22 +77,29 @@ bool toggleIcon = true;
         ),
         actions: [
           IconButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  elevation: 0,
-                  isScrollControlled: true,
-                  builder: ( BuildContext context ) {
-                    return Container(
-                      height: 600,
-                      child: searchView()
-                    );
-                  }
-              );
-              },
-              icon: const Icon(Icons.add_circle_outline),
-              color: Colors.white),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                elevation: 0,
+                isScrollControlled: true,
+                builder: ( BuildContext context ) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height,
+                    padding: EdgeInsets.only(top: 20),
+                    child: searchView()
+                  );
+                }
+            );
+            },
+            icon: const Icon(Icons.add_circle_outline),
+            color: Colors.white
+          ),
+
+         searchView1()
         ],
+
+
+
       ),
 
       

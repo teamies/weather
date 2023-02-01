@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../Models/current_model.dart';
 import '../../Models/weather_model.dart';
 import '../../controller/current_controller.dart';
+import '../../states/settingstate.dart';
 import '../../widgets/mapStringToWeatherConditionToImage.dart';
 
 class PlatFormInfo extends StatefulWidget {
@@ -16,6 +17,10 @@ class PlatFormInfo extends StatefulWidget {
 
 class _PlatFormInfoState extends State<PlatFormInfo> {
   // const Daily({super.key});
+
+  int _toFahrenheit(double celsius) => ((celsius *9/5)+32).round();
+  String _FormattedTemperatur( double temp, TemperatureUnit temperatureUnit) =>
+  temperatureUnit == TemperatureUnit.Fahrenheit ? '${_toFahrenheit(temp)}F' : '${temp.round()}C';
   late CurrentController _current;
   @override
   void initState() {
@@ -99,7 +104,9 @@ class _PlatFormInfoState extends State<PlatFormInfo> {
               Container(
                 margin: EdgeInsets.only(top: 15),
                 child: Text(
-                  snapshot.data!.hourly![0].weather![0].description.toString(),
+                   ((date < sunrise) || (date > sunset)) 
+                  ? snapshot.data!.hourly![0].weather![0].descriptionN.toString()
+                  : snapshot.data!.hourly![0].weather![0].descriptionD.toString(),
                   style: appStyleText.textStyle24b,
                 )
               ),

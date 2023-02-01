@@ -69,23 +69,28 @@ class _CurrentGridViewState extends State<CurrentGridView> {
                       child: Row(children: [
                         Container(
                           height: 70,
-                          width: 70,
+                          // width: 70,
+                          width: MediaQuery.of(context).size.width*1/7,
+
                           child:
                               Image.asset('assets/img/imgweather/sunrise.png'),
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Mặt trời mọc',
-                              style: appStyleText.textStyle18,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(" ${snapshot.data!.current?.sunrise}",
-                                  style: appStyleText.textStyle16),
-                            )
-                          ],
+                        Container(
+                          width: MediaQuery.of(context).size.width*2/9,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Mặt trời mọc',
+                                style: appStyleText.textStyle18,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(" ${snapshot.data!.current?.sunrise}",
+                                    style: appStyleText.textStyle16),
+                              )
+                            ],
+                          ),
                         ),
                       ]),
                     ),
@@ -312,8 +317,7 @@ class _CurrentGridViewState extends State<CurrentGridView> {
         });
   }
 
-  // ignore: non_constant_identifier_names
-  FutureBuilder<allWeather> Row3() {
+  Widget Row3() {
     return FutureBuilder(
       future: _current.getCurrent(),
       builder: (context, snapshot) {
@@ -324,7 +328,7 @@ class _CurrentGridViewState extends State<CurrentGridView> {
               children: [
                 Expanded(
                   child: Container(
-                    height: 240,
+                    height: MediaQuery.of(context).size.height/3,
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 16, 4, 59).withOpacity(0.7),
                         borderRadius: BorderRadius.circular(20)),
@@ -357,7 +361,7 @@ class _CurrentGridViewState extends State<CurrentGridView> {
                 ),
                 Expanded(
                   child: Container(
-                    height: 240,
+                    height: MediaQuery.of(context).size.height/3,
                     padding: EdgeInsets.only(top: 30, bottom: 30, left: 15, right: 15),
                     decoration: BoxDecoration(
                         color: Color.fromARGB(255, 16, 4, 59).withOpacity(0.7),
@@ -426,9 +430,12 @@ class _CurrentGridViewState extends State<CurrentGridView> {
                                 size: 30,
                                 color: Colors.white,
                               ),
-                              Text(
-                                snapshot.data!.daily![0].moonPhase.toString(),
-                                style: appStyleText.textStyle18,
+                              Container(
+                                width: MediaQuery.of(context).size.width* 2/7,
+                                child: Text(
+                                  snapshot.data!.daily![0].moonPhase.toString(),
+                                  style: appStyleText.textStyle18,
+                                ),
                               ),
                             ],
                           ),

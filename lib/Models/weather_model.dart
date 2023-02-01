@@ -18,15 +18,17 @@ enum WeatherCondition {
 class Weather {
   num? id;
   String? main;
-  String? description;
+  String? descriptionD;
+  String? descriptionN;
   String? icon;
   late WeatherCondition condition;
-  Weather({this.id, this.main, this.description, this.icon, required this.condition});
+  Weather({this.id, this.main, this.descriptionD, this.descriptionN, this.icon, required this.condition});
 
   Weather.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     main = json['main'];
-    description = WCondition(json['description']);
+    descriptionD = WConditionD(json['description']);
+    descriptionN = WConditionN(json['description']);
     icon = json['icon'];
     condition = mapStringToWeatherCondition(json['description']);
   }
@@ -35,13 +37,14 @@ class Weather {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['main'] = this.main;
-    data['description'] = this.description;
+    data['description'] = this.descriptionD;
+    data['description'] = this.descriptionN;
     data['icon'] = this.icon;
     data['description'] = this.condition;
     return data;
   }
-
-  static WCondition (String descriptionVN){
+  
+  static WConditionD (String descriptionVN){
     String description = '';
     switch (descriptionVN) {
       case 'few clouds':
@@ -62,6 +65,39 @@ class Weather {
         break;
       case 'moderate rain':
         description ='Mưa vừa';
+        break;
+      case 'clear sky':
+        description ='Trời nắng';
+        break;
+    }
+    return description;
+  }
+
+
+  static WConditionN (String descriptionVN){
+    String description = '';
+    switch (descriptionVN) {
+      case 'few clouds':
+        description = 'Có mây';
+        break;
+      case 'scattered clouds':
+        description ='Ít mây';
+        break;
+      case 'broken clouds':
+        description ='Nhiều mây';
+        break;
+      case 'overcast clouds':
+        description ='Mây đen';
+        break;
+
+      case 'light rain':
+        description ='Mưa nhỏ';
+        break;
+      case 'moderate rain':
+        description ='Mưa vừa';
+        break;
+      case 'clear sky':
+        description ='Trời quang';
         break;
       
     }
