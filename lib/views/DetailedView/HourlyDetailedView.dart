@@ -407,9 +407,9 @@ class _HourlyDetailedViewState extends State<HourlyDetailedView> {
                                                 width: 1,
                                                 color: Colors.white))),
                                     child: Text(
-                                      (snapshot.data!.hourly![0].rain?.d1h != null)
-                                          ? "Lượng mưa: ${snapshot.data!.hourly![0].rain?.d1h} mm"
-                                          : "'Lượng mưa:  0 mm",
+                                      (snapshot.data!.hourly![index].rain != null)
+                                          ? "Lượng mưa: ${snapshot.data!.hourly![index].rain!.d1h} mm"
+                                          : "Lượng mưa:  0 mm",
                                       style: appStyleText.textStyle16,
                                     ),
                                   ),

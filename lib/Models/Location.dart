@@ -15,4 +15,12 @@ class Location {
         lon: json['lon'].toDouble(),
         lat: json['lat'].toDouble());
   }
+
+  static Location toJson(String name,dynamic lon,dynamic lat) {
+
+    return Location(
+        name: name,
+        lon: lon.toDouble(),
+        lat: lat.toDouble());
+  }
 }

@@ -299,7 +299,7 @@ class _DailyDetailedViewState extends State<DailyDetailedView> {
                                               width: 1, color: Colors.white))),
                                   child: Text(
                                     'Mặt trời mọc: ' +
-                                        snapshot.data![index].sunrise
+                                        snapshot.data![index].sunrise_hour
                                             .toString(),
                                     style: appStyleText.textStyle16,
                                   ),
@@ -313,7 +313,7 @@ class _DailyDetailedViewState extends State<DailyDetailedView> {
                                               width: 1, color: Colors.white))),
                                   child: Text(
                                     'Mặt trời lặn: ' +
-                                        snapshot.data![index].sunset.toString(),
+                                        snapshot.data![index].sunset_hour.toString(),
                                     style: appStyleText.textStyle16,
                                   ),
                                 ),
@@ -438,8 +438,8 @@ class _DailyDetailedViewState extends State<DailyDetailedView> {
                                           bottom: BorderSide(
                                               width: 1, color: Colors.white))),
                                   child: Text(
-                                    (snapshot.data![0].rain != null)
-                                        ? "Lượng mưa: ${snapshot.data![0].rain} mm"
+                                    (snapshot.data![index].rain != null)
+                                        ? "Lượng mưa: ${snapshot.data![index].rain} mm"
                                         : "Lượng mưa:  0 mm",
                                     style: appStyleText.textStyle16,
                                   ),

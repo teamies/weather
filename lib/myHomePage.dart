@@ -14,7 +14,6 @@ import 'package:flutter_app_weather/views/main2.dart';
 
 import 'chartView/progressChart/WeekProgressChart.dart';
 import 'chartView/views/DailySummaryView.dart';
-import 'widgets/day_widget.dart';
 
 // import 'widgets/temp_widget.dart';
 class MyHomePage extends StatefulWidget {
@@ -95,7 +94,6 @@ bool toggleIcon = true;
             color: Colors.white
           ),
 
-         searchView1()
         ],
 
 

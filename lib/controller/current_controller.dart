@@ -9,13 +9,14 @@ import '../config/textstyle.dart';
 class CurrentController {
   Future<allWeather> getCurrent() async {
    final response = await http.get(Uri.parse(
-        url + '/onecall?lat=21.592477&lon=105.8435398&units=metric&' + api_key2));
+        url + '/onecall?lat=21.592477&lon=105.8435398&units=metric&' + api_key));
     if (response.statusCode == 200) {
       print(response.body);
     } else {
         // If the server did not return a 200 OK response,
         // then throw an exception.
       // throw Exception('Failed to load Current');
+      
     }
       return allWeather.fromJson(jsonDecode(response.body));
 

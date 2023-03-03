@@ -7,6 +7,8 @@ import 'package:flutter_app_weather/myHomePage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
+import '../../states/WeatherUnitButton.dart';
 // import 'package:flutter/src/widgets/framework.dart';
 
 class SettingView extends StatefulWidget {
@@ -18,6 +20,20 @@ class SettingView extends StatefulWidget {
 
 class _SettingViewState extends State<SettingView> {
 
+  String currentUnit = 'Celsius';
+  double temperature = 40.0;
+
+  void onUnitChanged(String newUnit) {
+    setState(() {
+      if (newUnit == 'Celsius') {
+        temperature = (temperature - 32) * 5 / 9;
+      } else {
+        temperature = (temperature * 9 / 5) + 32;
+      }
+      currentUnit = newUnit;
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +70,12 @@ class _SettingViewState extends State<SettingView> {
             ),
           ),
           child: Column(
-            children: [temperature(), rain(), windspeed(), pressure(),
+            children: [
+              TemperatureUnitButton(
+              currentUnit: currentUnit,
+              onUnitChanged: onUnitChanged,
+            ),
+              Temperature(), rain(), windspeed(), pressure(),
               Container(
                 margin: EdgeInsets.only(top: 150),
                 child: TextButton(
@@ -75,7 +96,7 @@ class _SettingViewState extends State<SettingView> {
         ));
   }
 
-  Widget temperature() {
+  Widget Temperature() {
     return Container(
       child: Column(
         children: [

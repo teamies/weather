@@ -34,7 +34,7 @@ class HourlyController {
   Future<List<Hourly>> getHourly() async {
     List<Hourly> _list = [];
     final response = await http.get(Uri.parse(
-        url + '/onecall?lat=21.592477&lon=105.8435398&units=metric&' + api_key2));
+        url + '/onecall?lat=21.592477&lon=105.8435398&units=metric&' + api_key));
     if (response.statusCode == 200) {
       print('------------------hihhi-------------');
       print(response.body);
